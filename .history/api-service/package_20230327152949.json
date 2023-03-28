@@ -1,0 +1,11 @@
+{
+  "name": "api-service",
+  "version": "1.0.0",
+  "description": "Miguel Mello implementation of api-service for Jobsity Code Challenge.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Miguel ",
+  "license": "ISC"
+}

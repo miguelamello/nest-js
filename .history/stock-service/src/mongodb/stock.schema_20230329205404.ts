@@ -1,0 +1,13 @@
+import { Schema } from 'mongoose';
+
+export const StockSchema = new Schema({
+  name: { type: String, required: true },
+  symbol: { type: String, required: true },
+  open: { type: Number, required: true },
+  high: { type: Number, required: true },
+  low: { type: Date, required: true },
+  close: { type: Date, required: true },
+  volume: { type: Date, required: true },
+  date: { type: Date, required: true },
+  time: { type: Date, required: true },
+});

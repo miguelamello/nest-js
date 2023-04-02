@@ -1,0 +1,9 @@
+import { IsEmail } from 'class-validator';
+export default class CreateUserDto {
+
+  "email"?: string;
+  "password"?: string;
+  "role"?: string;
+
+}
+

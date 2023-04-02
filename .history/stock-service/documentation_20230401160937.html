@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STOCK QUOTE MICROSERVICE</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      padding: 3% 15%;
+    }
+    h3 {
+      margin-top: 5%;
+    }
+    pre {
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <h2>STOCK QUOTE MICROSERVICE</h2>
+  <p>
+    This microservice aims to facilitate the acquisition of stock quotes from various companies.
+    Please follow the documentation to get a complete understanding of how the service works.
+  </p>
+
+  <h3>1. Entrypoint</h3>
+  <code>https://api.stock-quote.io/v1</code>
+  <p>
+    All endpoints starts from the entrypoint above. Accessing the entrypoint 
+    above will retrieve the REMOTE STOCK QUOTE MICROSERVICE Documentation.
+  </p>
+
+  <h3>2. Authentication</h3>
+  <p>JWT (JSON Web Token) Authentication is required for the routes on the microservice. 
+    Below is listed the steps that must be followed to get a valid JWT Token.</p>
+
+  <p>
+    <div><b>2.1 Sign Up to the service</b></div><br>
+
+    <pre>
+POST /auth/signup HTTP/1.1
+Host: https://api.stock-quote.io/v1
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 35
+
+email=miguelangelomello@gmail.com
+    </pre>    
+
+    <div>You must send a POST request to /auth/signup and send in the POST BODY a valid email. 
+      You will receive a email with a link to confirm your email address. After the email confirmation, 
+      another email with your Username and Password will be sent to you. You should use this login 
+      information to get your JWT Token. Keep following.</div>
+    </div>
+  </p>
+
+  <p>
+    <div><b>2.1 Sign In to the service</b></div><br>
+
+    <pre>
+POST /auth/signin HTTP/1.1
+Host: https://api.stock-quote.io/v1
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 77
+
+email=miguelangelomello@gmail.com&
+password=e49015be5ba9752ab634b5649045bc56
+    </pre>    
+
+    <div>You must send a POST request to /auth/signin and with POST BODY containing the 
+      confirmed email and the password you received by email. If login is valid you will 
+      receive a response with the JWT Token that you must use to access all the available 
+      routes on the service. Keep following.</div>
+    </div>
+
+    <pre>
+      POST /auth/signin HTTP/1.1
+      Host: https://api.stock-quote.io/v1
+      Content-Type: application/x-www-form-urlencoded
+      Content-Length: 77
+      
+      email=miguelangelomello@gmail.com&
+      password=e49015be5ba9752ab634b5649045bc56
+          </pre>  
+
+  </p>
+
+  <h3>3. Endpoints</h3>
+
+  <h4>3.1 Getting a stock quotation.</h4>
+
+  <p>
+    <div><b>Example 3.1.1:</b></div>
+    <div>Let's say you want to get the US stock quote of Apple Inc. (AAPL).</div>
+    <div>You can request the following endpoint:</div><br>
+    <code>GET /quote/aapl.us</code>
+
+    <p>The server response will be a JSON similar to:</p>
+
+    <pre>
+{
+  "symbol":"AAPL.US",
+  "date":"2023-03-28",
+  "time":"22:00:07",
+  "open":157.97,
+  "high":158.49,
+  "low":155.98,
+  "close":157.65,
+  "volume":38112523,
+  "name":"APPLE"
+}
+    </pre>
+  </p>
+  <p>
+    <div><b>Example 3.1.2:</b></div>
+    <div>Let's say you want to get the UK stock quote of HSBC HOLDINGS. (HSBA.UK).</div>
+    <div>You can request the following endpoint:</div><br>
+    <code>GET /quote/hsbc.uk</code>
+
+    <p>The server response will be a JSON similar to:</p>
+
+    <pre>
+{
+  "symbol":"HSBA.UK",
+  "date":"2023-03-28",
+  "time":"17:39:12",
+  "open":546,
+  "high":549.3,
+  "low":536.3,
+  "close":541.1,
+  "volume":21063071,
+  "name":"HSBC HOLDINGS"
+}
+    </pre>
+  </p>
+
+  <p>
+    <div><b>Example 3.1.3:</b></div>
+    <div>Let's say you want to get the US Nasdaq stock quote of AMERICAN AIRLINES GROUP (AAL.US).</div>
+    <div>However you mispelled the symbol.</div><br>
+    <code>GET /quote/aml.us</code>
+
+    <p>The server response will be a JSON similar to:</p>
+
+    <pre>{}</pre>
+
+    <p>
+      <b>Note:</b> The server will return an empty object literal when the symbol is not found.
+    </p>
+  </p>
+
+  <h3>4. Usage examples</h3>
+
+  <p>Testing can be done using many ways depending of the client resources.</p>
+
+  <code>curl -X GET https://api.remote-stock.io/v1/quote/aapl.us</code>
+  <div>From command line as above made with CURL in Linux / Unix / IOS</div>
+  <br>
+  <code>https://api.remote-stock.io/v1/quote/aapl.us</code>
+  <div>From any internet browser by just navigating to the endpoint.</div>
+  <br>
+  <code>const promisse = await fetch(https://api.remote-stock.io/v1/quote/aapl.us)</code>
+  <div>From Node.js using fetch or any other fetch implementation.</div>
+
+  <p>
+    <b>Note:</b> All responses from endpoints are in JSON format, which are a 
+    representation of Javascript(ECMAScript) entities like Arrays, Objects, 
+    Strings, Numbers and so on. Clients must convert JSON to real entities 
+    on their side.
+  </p>
+
+  <h3>5. Error Responses</h3>
+
+  <p>
+    Server will respond with an Error Object Literal containing 
+    the status and the message of error. Errors can be triggered 
+    by the client itself, for example when sending mistyped endpoints 
+    or the server itself can trigger a Error when a 
+    task can not be completed for any reason. 
+  </p>
+
+  <p>
+    <code>{ "statusCode": number, "message": string }</code><br>
+    <div>
+      The object literal returned will contain two properties: 
+      "statusCode" with a number and "message" with the human readable text.
+    </div>
+  </p>
+
+  <p>Exemple Error Message:</p>
+  <p>
+    <code>
+      {"statusCode":400,"message":"Symbol must be a valid quote."}
+    </code>
+  </p>
+
+  <h3>6. Disclaimer</h3>
+  <p>
+    This microservice should be used strictly as proposed in this documentation. 
+    Any usage that is not in accordance with the documentation may result in harmful 
+    consequences to the user. The authors of this service are not responsible for 
+    any misuse of the proposed microservice and its consequences. If you have any question, 
+    suggestion, information regarding the use of this service, please contact 
+    the authors at <b>developers@remote-stock.io</b>
+  </p>
+
+</body>
+</html>

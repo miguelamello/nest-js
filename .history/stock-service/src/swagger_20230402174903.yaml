@@ -1,0 +1,30 @@
+openapi: 3.0.0
+info:
+  title: STOCK QUOTE 
+  description: API description
+  version: 1.0.0
+paths:
+  /users:
+    get:
+      summary: Get a list of users
+      operationId: getUsers
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+
+

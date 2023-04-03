@@ -1,0 +1,30 @@
+openapi: 3.0.0
+info:
+  title: STOCK QUOTE API SPECIFICATION
+  description: This microservice aims to facilitate the acquisition of stock quotes > from various companies. Please follow the documentation to get a complete understanding of how the service works.
+  version: 1.0.0
+paths:
+  /users:
+    get:
+      summary: Get a list of users
+      operationId: getUsers
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+
+

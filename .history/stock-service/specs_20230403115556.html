@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STOCK QUOTE MICROSERVICE</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      padding: 3% 15%;
+    }
+    h3 {
+      margin-top: 5%;
+    }
+    pre {
+      margin: 0; 
+      overflow: auto;
+    }
+  </style>
+</head>
+<body>
+  <h2>STOCK QUOTE MICROSERVICE SPECIFICATIONS</h2>
+  <p>
+    This Technical Specification Document describes the REST API for STOCK QUOTE MICROSERVICE. 
+    The API provides routes for user authentication, managing user accounts, and retrieving stock market data.
+    The specification is written in Markdown and uses the OpenAPI Specification (OAS) format.
+  </p>
+
+  <p>
+    API Routes:</p>
+
+Accessing API documentation:
+Route: GET /
+Response: Returns a description of the API and a link to the API documentation.
+
+Accessing API specification:
+Route: GET /specs
+Response: Returns a technical specification document of the API.
+
+Creating new user:
+Route: POST /auth/signup
+Request: JSON body containing user details including email, password, and username.
+Response: JSON object containing user details including user ID and email.
+
+Getting JWT Token:
+Route: POST /auth/signin
+Request: JSON body containing user email and password.
+Response: JSON object containing a JWT token that can be used for authentication.
+
+Resetting your password:
+Route: POST /auth/reset-password
+Request: JSON body containing user email.
+Response: Returns a success message if the password reset request is valid.
+
+Getting stock quotation:
+Route: GET /stocks/{symbol}
+Request: Path parameter containing stock symbol.
+Response: Returns the current stock price for the specified stock symbol.
+
+Getting stock statistics:
+Route: GET /stocks/stats
+Request: None.
+Response: Returns statistics for all stocks including highest price, lowest price, and average price.
+
+Getting stock history:
+Route: GET /stocks/history
+Request: Query parameters including stock symbol, start date, and end date.
+Response: Returns historical stock prices for the specified stock symbol within the specified date range.
+
+Authentication:
+All routes, except for access to the API documentation and specification, require a JWT token for authentication. Users must obtain a JWT token by making a request to the /auth/signin route. The JWT token should be included in the Authorization header of subsequent requests.
+
+Error Handling:
+The API will return error responses if an error occurs during request processing. The error responses will include a descriptive error message and an HTTP status code indicating the type of error.
+
+Conclusion:
+This Technical Specification Document outlines the REST API for a stock trading application. It describes the available endpoints, request and response parameters, authentication requirements, and error handling. This document serves as a reference for developers looking to integrate with the API.
+  </p>
+
+</body>
+</html>

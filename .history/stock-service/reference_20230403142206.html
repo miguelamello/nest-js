@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STOCK QUOTE MICROSERVICE REFERENCE</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      padding: 3% 15%;
+    }
+    h3 {
+      padding: 5px;
+      border-left: 10px solid lightgrey;
+    }
+    H4 {
+      padding: 5px;
+      border-left: 10px solid lightgrey
+    }
+    H5 {
+      padding: 5px;
+      border-left: 10px solid lightgrey
+    }
+    pre {
+      margin: 0; 
+      overflow: auto;
+    }
+  </style>
+</head>
+<body>
+  <h2>STOCK QUOTE MICROSERVICE REFERENCE</h2>
+  <p>
+    This Technical Specification Document describes the REST API for STOCK QUOTE MICROSERVICE. 
+    The API provides routes for user authentication, managing user accounts, and retrieving stock market data.
+    The specification is written in Markdown and uses the OpenAPI Specification (OAS) format.
+  </p>
+
+  <p>
+    <h3>1. Routes</h3>
+    <p>
+      All routes starts with the base URL: <code>https://api.stock-quote.io/v1</code>
+    </p>
+
+    <pre>
+      GET /                     //-> Accessing API documentation
+      GET /reference            //-> Accessing API reference
+      POST /auth/signup         //-> Creating new user
+      POST /auth/signin         //-> Getting JWT Token
+      POST /auth/reset-password //-> Resetting your password
+      GET /stocks/{symbol}      //-> Getting stock quotation
+      GET /stocks/stats         //-> Getting stock statistics
+      GET /stocks/history       //-> Getting stock history
+        </pre>
+  </p>
+
+  <!-- 1.1. GET /  -->
+  <p>
+    <h4>1.1. GET /</h4>
+    Route to return the HTML markup that displays the API 
+    Documentation in a easy and approuchable way.
+  </p>
+  <h5>Request Header:</h5>
+  <pre>
+GET / HTTP/1.1
+Host: https://api.stock-quote.io/v1
+  </pre>
+
+  <h5>Request Body:</h5>
+  <pre>
+none
+  </pre>
+
+  <h5>Response Header:</h5>
+  <pre>
+Content-Type: text/html; charset=utf-8
+  </pre>
+
+  <h5>Response Body: </h5>
+
+  <pre>
+&lt;!DOCTYPE html&gt;
+  &lt;html lang="en"&gt;
+    &lt;head&gt;
+      &lt;meta charset="UTF-8"&gt;
+      &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+      &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+      &lt;title&gt;STOCK QUOTE MICROSERVICE DOCUMENTATION&lt;/title&gt;
+      ...
+  </pre>
+
+  <!-- 1.2. GET /reference  -->
+  <p>
+    <h4>1.2. GET /reference</h4>
+    Route to return the HTML markup that displays the API 
+    Reference in a detailed format.
+  </p>
+  <h5>Request Header:</h5>
+  <pre>
+GET /reference HTTP/1.1
+Host: https://api.stock-quote.io/v1
+  </pre>
+
+  <h5>Request Body:</h5>
+  <pre>
+none
+  </pre>
+
+  <h5>Response Header:</h5>
+  <pre>
+Content-Type: text/html; charset=utf-8
+  </pre>
+
+  <h5>Response Body: </h5>
+
+  <pre>
+&lt;!DOCTYPE html&gt;
+  &lt;html lang="en"&gt;
+    &lt;head&gt;
+      &lt;meta charset="UTF-8"&gt;
+      &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+      &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+      &lt;title&gt;STOCK QUOTE MICROSERVICE REFERENCE&lt;/title&gt;
+      ...
+  </pre>
+
+  <!-- 1.3. POST /auth/signup  -->
+  <p>
+    <h4>1.3. POST /auth/signup</h4>
+    Route to create a new user to the API service.
+  </p>
+  <h5>Request Header:</h5>
+  <pre>
+POST /auth/signup HTTP/1.1
+Host: https://api.stock-quote.io/v1
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 35
+  </pre>
+
+  <h5>Request Body:</h5>
+  <pre>
+email=yourname@example.com&
+role=user
+  </pre>
+
+  <h5>Response Header:</h5>
+  <pre>
+Content-Type: application/json; charset=utf-8
+  </pre>
+
+  <h5>Response Body: </h5>
+
+  <pre>
+{
+  "email": "yourname@example.com",
+  "role": "user", 
+  "message": "User created successfully. Check your email for the password."
+}
+  </pre>
+
+  <!-- 1.4. POST /auth/signin  -->
+  <p>
+    <h4>1.4. POST /auth/signin</h4>
+    Route to obtain a JWT token to access the API service.
+  </p>
+  <h5>Request Header:</h5>
+  <pre>
+POST /auth/signin HTTP/1.1
+Host: https://api.stock-quote.io/v1
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 56
+  </pre>
+
+  <h5>Request Body:</h5>
+  <pre>
+email=yourname@example.com&
+password=e49015be5ba9752ab634b5649045bc56
+  </pre>
+
+  <h5>Response Header:</h5>
+  <pre>
+Content-Type: application/json; charset=utf-8
+  </pre>
+
+  <h5>Response Body: </h5>
+
+  <pre>
+{
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1pZ3VlbGFuZ2Vsb21lbGxvQGdt
+  YWlsLmNvbSIsInN1YiI6IjY0Mjk4ODg1ZWI4YmU1YzI4NzE5ZWU4YSIsImlhdCI6MTY4MDUzMjQ0MiwiZXhwIjoxNjgwNjE4OD
+  QyfQ.825oCeNJ2XdZUMuC-FZafONsoxtk1CIW5XBksBH3UTg"
+}
+  </pre>
+
+  <!-- 1.5. POST /auth/reset-password  -->
+  <p>
+    <h4>1.5. POST /auth/reset-password</h4>
+    Route to obtain a JWT token to access the API service.
+  </p>
+  <h5>Request Header:</h5>
+  <pre>
+POST /auth/reset-password HTTP/1.1
+Host: https://api.stock-quote.io/v1
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 99
+  </pre>
+
+  <h5>Request Body:</h5>
+  <pre>
+email=yourname@example.com
+  </pre>
+
+  <h5>Response Header:</h5>
+  <pre>
+Content-Type: application/json; charset=utf-8
+  </pre>
+
+  <h5>Response Body: </h5>
+
+  <pre>
+{
+  "email": "yourname@example.com",
+  "role": "user", 
+  "message": "Password reseted successfully. Check your email for the password."
+}
+  </pre>
+
+</body>
+</html>

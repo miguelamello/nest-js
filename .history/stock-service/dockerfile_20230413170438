@@ -3,5 +3,5 @@ WORKDIR /stock-service
 COPY package*.json ./
 RUN npm install
 COPY . .
-EXPOSE 14000
+EXPOSE 13001
 CMD [ "npm", "run", "start:prod" ]

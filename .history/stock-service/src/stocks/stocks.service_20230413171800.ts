@@ -13,7 +13,7 @@ import { env } from '../env';
 @Injectable()
 export class StocksService {
 
-  private entryPoint: string;
+  private entreyPoint: string;
   private apiKey: string; 
 
   constructor(
@@ -22,12 +22,12 @@ export class StocksService {
     private readonly jwtService: JwtService,
     private usersService: UsersService,
   ) {
-    this.entryPoint = `http://${env.app_host}:${env.app_port}/quote/`;
+    this.entreyPoint = 'http://localhost:3000/quote/';
     this.apiKey = ''; 
   }
 
   async #getUpdatedQuote( symbol: string ): Promise<Quote> {
-    const promisse = await fetch(`${this.entryPoint}${symbol}`);
+    const promisse = await fetch(`${this.entreyPoint}${symbol}`);
     const response = await promisse.json();
     return (response.name) ? response : '{}';
   }

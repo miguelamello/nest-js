@@ -22,7 +22,7 @@ export class StocksService {
     private readonly jwtService: JwtService,
     private usersService: UsersService,
   ) {
-    this.entryPoint = `http://${env.app_host}:${env.app_port}/quote/`;
+    this.entryPoint = `http://localhost:3000/quote/`;
     this.apiKey = ''; 
   }
 

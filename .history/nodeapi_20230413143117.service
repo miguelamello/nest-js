@@ -1,0 +1,28 @@
+#
+# Systemd service configuration file for the nest_ service. 
+# Under Unix/Linux servers that use Systemd, it's a great 
+# way to configure the nest_ service.
+# 
+# Usage: 
+# systemdctl status nest_
+# systemdctl start nest_
+# systemdctl stop nest_
+# systemdctl restart nest_
+#
+
+[Unit]
+Description=nodeapi
+
+[Service]
+User=webmaster
+Group=webmaster
+WorkingDirectory=/home/webmaster/nodeapi
+Environment=NODE_ENV=production
+ExecStart=/usr/local/bin/ts-node /home/webmaster/nodeapi/server.ts
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+
+

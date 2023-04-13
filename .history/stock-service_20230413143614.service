@@ -1,0 +1,28 @@
+#
+# Systemd service configuration file for the stock-service service. 
+# Under Unix/Linux servers that use Systemd, it's a great 
+# way to configure the stock-service service.
+# 
+# Usage: 
+# systemdctl status stock-service
+# systemdctl start stock-service
+# systemdctl stop stock-service
+# systemdctl restart stock-service
+#
+
+[Unit]
+Description=stock-service
+
+[Service]
+User=webmaster
+Group=webmaster
+WorkingDirectory=/home/webmaster/jobsity/stock-service
+Environment=NODE_ENV=production
+ExecStart=/usr/local/bin/node /home/webmaster/jobsity/stock-service/dist/main.ts
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+
+

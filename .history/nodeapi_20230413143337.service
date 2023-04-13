@@ -1,0 +1,28 @@
+#
+# Systemd service configuration file for the api-service service. 
+# Under Unix/Linux servers that use Systemd, it's a great 
+# way to configure the api-service service.
+# 
+# Usage: 
+# systemdctl status api-service
+# systemdctl start api-service
+# systemdctl stop api-service
+# systemdctl restart api-service
+#
+
+[Unit]
+Description=api-service
+
+[Service]
+User=webmaster
+Group=webmaster
+WorkingDirectory=/home/webmaster/jobsity/api-service
+Environment=NODE_ENV=production
+ExecStart=/usr/local/bin/ts-node /home/webmaster/jobsity/api-service/server.ts
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+
+

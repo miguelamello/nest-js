@@ -22,11 +22,12 @@ export class StocksService {
     private readonly jwtService: JwtService,
     private usersService: UsersService,
   ) {
-    this.entryPoint = `http://${env.api_host}:${env.api_port}/quote/`;
+    this.entryPoint = `http://${env.api_host}:${env.app_port}/quote/`;
     this.apiKey = ''; 
   }
 
   async #getUpdatedQuote( symbol: string ): Promise<Quote> {
+    console.log(`${this.entryPoint}${symbol}`);
     const promisse = await fetch(`${this.entryPoint}${symbol}`);
     const response = await promisse.json();
     return (response.name) ? response : '{}';

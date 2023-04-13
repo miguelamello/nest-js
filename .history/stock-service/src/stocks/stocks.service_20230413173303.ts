@@ -27,6 +27,7 @@ export class StocksService {
   }
 
   async #getUpdatedQuote( symbol: string ): Promise<Quote> {
+    console.log(`${this.entryPoint}${symbol}`);
     const promisse = await fetch(`${this.entryPoint}${symbol}`);
     const response = await promisse.json();
     return (response.name) ? response : '{}';
